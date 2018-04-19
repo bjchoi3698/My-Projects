@@ -77,4 +77,55 @@ $
  * Hit "New SSH key"
  * Use any name you like for Title and paste into "Key"
 
-6. 
+6. Goto Jenkins UI and create a new job as Freestyle
+
+7. In the Source Code Management, Choose "Git" and paste the URL of git repository
+
+Repository URL: https://github.com/bjchoi3698/devopslibrary.github.io.git
+
+*Don't use* __use SSH__ It doesn't work at Repository URL any more.
+
+8. Go to Build
+   Choose "Execute Shell" from Add build step drop-down-list
+   In Command,
+   ```
+   cp * /var/www/html/ -rf 
+   sudo /etc/init.d/apache2 restart
+   ```
+   
+9. Save the job
+ 
+10. Build Now
+ 
+11. View Console Output
+```
+Started by user Jenkins User
+Building in workspace /var/lib/jenkins/workspace/FP-GitSourceControl
+Cloning the remote Git repository
+Cloning repository https://github.com/bjchoi3698/devopslibrary.github.io.git
+ > git init /var/lib/jenkins/workspace/FP-GitSourceControl # timeout=10
+Fetching upstream changes from https://github.com/bjchoi3698/devopslibrary.github.io.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/bjchoi3698/devopslibrary.github.io.git +refs/heads/*:refs/remotes/origin/*
+ > git config remote.origin.url https://github.com/bjchoi3698/devopslibrary.github.io.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/bjchoi3698/devopslibrary.github.io.git # timeout=10
+Fetching upstream changes from https://github.com/bjchoi3698/devopslibrary.github.io.git
+ > git fetch --tags --progress https://github.com/bjchoi3698/devopslibrary.github.io.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 61c426d134aa9014b77ef4be033ad2517859c82f (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 61c426d134aa9014b77ef4be033ad2517859c82f
+Commit message: "fixed"
+First time build. Skipping changelog.
+[FP-GitSourceControl] $ /bin/sh -xe /tmp/jenkins2070046377307242319.sh
++ cp CNAME DevOps.html Docker.html ELK.html Gemfile Gemfile.lock JUnit.xml Jenkins.html Linux.html PowerShell.html SaltStack.html Vagrant.html _config.yml _includes _layouts _posts _sass about.md bootstrap-salt.ps1 css devopsreport2016.pdf episode2-salt.zip episode3-jenkins.zip episode4-saltstates.zip episode5-jenkins.zip episode6-saltychocolate.zip episode7-docker.zip episode9-ELK.zip feed.xml googlecdce2281efbcaa92.html images index.html jenkinscloud.txt marketing newsletter.html sample.html sample_files scripts test.html vagrant /var/www/html/ -rf
++ sudo /etc/init.d/apache2 restart
+ * Restarting web server apache2
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 10.0.2.15. Set the 'ServerName' directive globally to suppress this message
+   ...done.
+Finished: SUCCESS
+```
+
+
