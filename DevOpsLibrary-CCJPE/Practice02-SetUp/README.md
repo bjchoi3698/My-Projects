@@ -24,4 +24,10 @@ Installation of Jenkins is completed.
 
 5. Connect Jenkins via http://_server-host_:8080
 
+6. We could do iptables to reroute the port 8080 to 80
+```
+# iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
 
+# apt-get install iptables-persistent
+```
+It is all about how to set up Jenkins.
