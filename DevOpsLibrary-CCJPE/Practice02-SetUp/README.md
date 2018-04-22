@@ -3,7 +3,8 @@ Spin up a fresh Ubuntu 14.04 server on AWS
 1. Login in the server
 2. Get Jenkins key
 ```
-# wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt -key add -
+$ sudo -i
+# wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
 
 # echo "deb http://pkg.jenkins-ci.org/debian binary/" | tee -a /etc/apt/sources.list
 ```
