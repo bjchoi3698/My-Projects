@@ -1,0 +1,29 @@
+---
+- hosts: all
+# become root (using sudo, by default)
+become: yes
+tasks:
+  - name: Install nginx
+    # the 'package' module is new, and abstracts things like 'yum', 'apt',  and 'pkg' away
+    package: name={{ item }} state=present
+    # iterates over item
+    with items:
+      - nginx
+      # superfluous, should be split into a separate playbook
+      #- vim
+      - nano
+      - sshguard
+      - curl
+      
+  - name: Create Website directory
+    file: path=/var/www/mywebsite state=directory mode=0755
+    
+  - name: Copy nginx config files (main config and vhost config)
+    # copy FROM ansible controller to target machine (fetech is the opposite)
+    copy:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      owner: root
+      group: root
+      mode: 0644
+      
